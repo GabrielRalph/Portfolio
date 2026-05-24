@@ -1,0 +1,47 @@
+title: Coffee Table Design
+date: 2025-present
+pages: 
+  - title: Initial Design
+    image: ./assets/d1-01.jpg
+    description: 
+      The initial design consisted of brass cylindrical legs that came of the table at an angle. The legs would pass through the table top 
+      such that brass ellipses would be visible on the surface. The design was simple but personally lacked character. 
+      If the geometry of the table was not perfect the legs would not sit flush and would damage the floor. 
+
+  - title: Feet Designs
+    image: ./assets/d1-02.jpg
+    description: 
+      By introducing a hinged foot the design could be made more forgiving to angular errors. 
+      Two designs were explored, though the bottom one was rejected as it looked like it was from a moon lander.
+      The top design was more aesthetically pleasing and the hinge gave the table a more mechanical/robotic feel.
+  - title: Feet Designs Cont.
+    image: ./assets/d1-03.jpg
+    description: 
+      Parameterised CAD models of the the feet allowed for fast 
+      exploration into different design itterations. 
+      Parameters such as size and the number of intersecting segments could be easily changed to create different styles.
+      3D prints where made to compare different designs. 
+
+  - title: Manufacturing
+    image: ./assets/d1-04.jpg
+    description: 
+      When concidering manufacturing it was decided that 
+      CNC milling would likely be the most feasible for a 
+      one off production. This design could be machined
+      from two sections of solid brass rod to form the leg
+      and foot. The solid leg would increase the weight,
+      price of materials and manufacturing cost so
+      different approaches were considered.  
+
+  - title: Manufacturing Cont.
+    image: ./assets/d1-05.jpg
+    description:
+      This design uses two small parts to create the desired foot.
+      The foot is then attached to standard hollow brass tube via
+      a threaded section to create the full leg. In this way the
+      height of the leg was not constrained, the parts to
+      be milled would be smaller and price
+      would be reduced. 
+
+
+

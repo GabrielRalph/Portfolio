@@ -1,0 +1,97 @@
+title: Button Design
+date: 2026-present
+pages: 
+  - title: Design Brief
+    image: ./assets/pb-10.png
+    webpage: https://galetora.com/
+    description: 
+      The brief was to make smooth and rounded buttons in various shapes, such as stars, hearts and diamonds.
+      The buttons would be shank buttons made from a polished silver material and were intended to be used in a skirt design as functional and decorative element.
+
+  - title: Initial Designs
+    image: ./assets/pb-01.png
+    description:
+      Initial sketches explored the range of button shapes such as star, lightning bolt, diamond and heart.
+      Alongside flat 2D silhouettes, side profiles and three-quarter views were drawn to begin thinking about
+      how a flat outline could be given a rounded, three-dimensional form. At this stage the key challenge
+      was identified as finding a principled method to generate a smooth resolved surface from an arbitrary 2D shape.
+
+  - title: Illustrator's Inflate Effect
+    image: ./assets/pb-02.png
+    description:
+      Using Adobe Illustrator's "inflate" effect provided a quick way to generate a rounded surface from
+      the 2D outlines. However, where some shapes produced great 3D forms (e.g. the star) with nice 
+      rounded edges other shapes resulted in cross-sections with boxy squared of edges (e.g. the heart).
+      The rounded profile was preferred and it was clear that another method would be needed to achieve
+      this consistently across all shapes.
+
+  - title: CAD Extrusion Approach
+    image: ./assets/pb-03.png
+    description:
+      A CAD-based approach was explored by extruding the 2D outline and applying a fillet to the edges.
+      This was largely unsuccessful as the fillet operation produced a uniform radius that did not adapt
+      to the local geometry of the shape. Consequently, this method was quickly abandoned as it failed 
+      to capture the desired smooth, organic profile across all shapes, particularly in areas with tight curves or concave sections.
+
+      
+  - title: Mathematical Definition
+    image: ./assets/pb-4.svg
+    description:
+      A more mathematical approach was considered by defining the surface as a function S(x, y) = z,
+      where the height z at any point (x, y) within the button's interior would be determined by a formula. 
+      The goal was to find a formula that would yield a smooth shape with no sharp edges, 
+      zero height at the boundary and a peak at the center. 
+
+
+  - title: Distance Field Approach
+    image: ./assets/pb-05.png
+    description:
+      A more principled approach was explored by defining the surface height at any interior point as
+      S(x, y) = d, where d is the shortest distance from that point to the perimeter of the shape.
+      This yielded a tent-like surface, producing ridges along medial axes.
+      Although the concept was promising, the resulting profile had sharp creases 
+      along the boudary and medial axes, which was not the desired aesthetic. 
+      The distance field approach provided a useful starting point but required further 
+      refinement to achieve the smooth, rounded profile sought for the buttons.
+
+  - title: Refined Distance Field Formula
+    image: ./assets/pb-06.png
+    description:
+      By applying the equation of a circle to the distance field, the surface was remapped 
+      to S(x, y) = sqrt(d(2 - d)), where d is the distance to the perimeter normalized to a maximum of 1.
+      This transformation effectively smoothes the edges at the boundary. Unfortunately, while the sharp boundary 
+      edges were smoothed completely, ridges still remained visible along the medial axes. 
+      This method was an improvement over the raw distance field and even though it produced 
+      ridges, through smoothing algorithms it was possible to achieve a more polished surface. 
+      In the persuit of a more elegant solution, however, a different mathematical approach
+      was explored that would eliminate the ridges entirely.
+      
+
+
+  - title: Poisson's Equation Solution
+    image: ./assets/pb-07.png
+    description:
+      The final surface generation method used Poisson's equation. A scalar field S_p was first solved
+      across the button interior subject to the boundary condition S_p = 0 at the perimeter, using the
+      Poisson equation ∇²S_p = 1. The final height was then computed as S = sqrt(S_p(2 - S_p)).
+      This approach produces a perfectly smooth, crease-free surface that adapts naturally to any 2D outline,
+      eliminating all artefacts seen in previous methods. Although this method did create some what flatter 
+      profiles than the distance field approach, the resulting shapes had a more elegant, organic quality 
+      that was preferred for the final button designs.
+
+  - title: Prototypes
+    image: ./assets/pb-08.png
+    description:
+      3D prints of the heart, diamond, lightning bolt and star were produced to
+      evaluate the surface quality and overall proportions. The Poisson-derived profiles translated well
+      into physical form, with smooth continuous surfaces across all shapes including the challenging
+      concave sections of the star and lightning bolt. The prints confirmed the designs were ready to
+      be taken forward for manufacture in polished silver.
+
+  - title: Final Design
+    image: ./assets/pb-09.png
+    description:
+      Engineering drawings were produced for the finalised star button, specifying overall dimensions of
+      20 mm × 20 mm with a shank consisting of a ø2.5 mm boss and a ø1.5 mm through-hole at a depth of
+      1.5 mm from the base. The same dimensioning approach was applied to the remaining shapes.
+      These along side the 3D models were sent to the manufacturer for quotation and production.

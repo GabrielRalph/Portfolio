@@ -1,0 +1,212 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+  font-family: inherit;
+}
+
+:host(:focus-visible) .card {
+  outline: 0.125rem solid #0078d7;
+  outline-offset: 0.2rem;
+}
+
+/* ── Card shell ─────────────────────────────────────── */
+.card {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  --i-width: var(--img-width, 100%);
+  --t-width: var(--text-width, var(--i-width));
+  --space: var(--img-space, 0);
+  --i-2-d: var(--image-2-dots-spacing, calc(var(--space)/2));
+
+  gap: var(--vertical-spacing, 1em);
+}
+
+
+.carousel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--i-2-d);
+}
+/* ── Slides ──────────────────────────────────────────── */
+.slides-area {
+  position: relative;
+}
+
+.slides-vp {
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+  /* let the browser handle vertical panning; we handle horizontal */
+  touch-action: pan-y;
+}
+
+.slides-vp:active {
+  cursor: grabbing;
+}
+
+.track {
+  display: flex;
+  will-change: transform;
+  /* transform and transition are set dynamically via JS */
+}
+
+* > .slide:first-of-type {
+    margin-left: calc(50% - var(--i-width) / 2);
+}
+
+.slide {
+  min-width: var(--i-width);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 calc(var(--space)/2);
+  transition: opacity 0.3s;
+}
+
+.slide:not(.active) {
+  cursor: pointer;
+  opacity: 0.5;
+  filter: blur(3px);
+}
+
+.slide:not(.active):hover {
+  opacity: 0.75;
+}
+
+/* White image box */
+.img-box {
+  background: #ffffff;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 0.25rem;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.img-box iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0.25rem;
+  pointer-events: none;
+}
+/* ── Navigation arrows ───────────────────────────────── */
+.arrow { display: none;}
+/* .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 2.125rem;
+  height: 2.125rem;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(0.25rem);
+  -webkit-backdrop-filter: blur(0.25rem);
+  color: #222;
+  font-size: 1.375rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: 0 0.0625rem 0.375rem rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transition: opacity 0.2s, background 0.15s;
+}
+
+.card:hover .arrow:not(:disabled) { opacity: 1; }
+.arrow:hover                       { background: #ffffff; }
+.arrow:disabled                    { opacity: 0 !important; pointer-events: none; }
+.arrow-left  { left:  0.625rem; }
+.arrow-right { right: 0.625rem; }
+
+
+
+/* ── Dots ────────────────────────────────────────────── */
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  background: #ffdcc0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+}
+
+.dots .dot:first-of-type {
+    border-radius: 1em 0 0 1em;
+}
+.dots .dot:last-of-type {
+    border-radius: 0 1em 1em 0;
+}
+
+.dot.active {
+  background: #ff7b1d;
+}
+
+/* ── Caption (fades) ─────────────────────────────────── */
+.caption {
+  padding: 0 calc(50% - var(--t-width) / 2 + var(--space)/2);
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.caption.visible { opacity: 1; }
+
+.slide-title {
+  margin: 0 0 0.3125rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.slide-desc {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+/* ── Title ───────────────────────────────────────────── */
+
+.carousel-title {
+    margin: 0 calc(50% - var(--t-width) / 2 + var(--space)/2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.carousel-title i {
+    font-size: 0.6em;
+    opacity: 0.6;
+    font-weight: 500;
+}
+/* ── Responsive ──────────────────────────────────────── */
